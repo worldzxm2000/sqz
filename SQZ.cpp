@@ -22,7 +22,7 @@ QString GetServiceTypeName()
 //获取端口号
 int GetPort()
 {
-	return 27023;
+	return 27025;
 }
 
 //获取版本号
@@ -52,7 +52,7 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 	{
 		if (buff.at(i) == '\r' && buff.at(i + 1) == '\n')
 		{
-			QString strBuff = buff.mid(Current_P, i - Current_P + 1);
+			QString strBuff = buff.mid(Current_P, i - Current_P);
 			if (strBuff.count()< 3)
 			{
 				i++;
@@ -223,7 +223,7 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 				file.close();
 			}
 			//终端返回
-			else if(strBuff.at(i)=="<"&&strBuff.at(strBuff.count()-1)==">")
+			else if(strBuff.at(0)=='<'&&strBuff.at(strBuff.count()-1)=='>')
 			{
 				Count += 1;//数据个数
 				QStringList strlist = strBuff.split(",");
@@ -276,12 +276,10 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 					break;
 				}
 				json.insert(QString::number(Count), SubJson);
-				break;
 			}
 			//指针指向下个帧头
 			Current_P = i + 2;
 			i = Current_P;//当前循环
-			break;
 		}
 	}
 	json.insert("DataLength", Count);//JSON数据个数
