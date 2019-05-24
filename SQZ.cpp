@@ -229,7 +229,6 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 				QStringList strlist = strBuff.split(",");
 				QJsonObject SubJson;
 				int count = strlist.count();
-			
 				switch (count)
 				{
 					//单个返回值
@@ -279,7 +278,7 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 			}
 			//指针指向下个帧头
 			Current_P = i + 2;
-			i = Current_P;//当前循环
+			i = Current_P-1;//当前循环
 		}
 	}
 	json.insert("DataLength", Count);//JSON数据个数
