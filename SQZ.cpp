@@ -226,7 +226,8 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 			else if(strBuff.at(0)=='<'&&strBuff.at(strBuff.count()-1)=='>')
 			{
 				Count += 1;//数据个数
-				QStringList strlist = strBuff.split(",");
+				QString str = strBuff.mid(1, strBuff.count() - 2);
+				QStringList strlist = str.split(",");
 				QJsonObject SubJson;
 				int count = strlist.count();
 				switch (count)
@@ -240,7 +241,7 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 					subJson.insert("Count", 1);
 					subJson.insert("Params1", strlist.at(0));
 					SubJson.insert("Parameter", subJson);
-					SubJson.insert("ValueCount", 1);
+					SubJson.insert("ValueCount", 8);
 					break;
 				}
 				//双返回值

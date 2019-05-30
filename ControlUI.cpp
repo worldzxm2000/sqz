@@ -74,6 +74,18 @@ void ControlUI::on_WIDBtn_clicked()
 	::send(Socket, ch, len, 0);
 }
 
+//读取时钟
+void ControlUI::on_RTimeBtn_clicked()
+{
+	cmmIndex = 2303;
+	//读取时钟
+	QString Comm = "DATETIME\r\n";
+	QByteArray ba = Comm.toLatin1();
+	LPCSTR ch = ba.data();
+	int len = Comm.length();
+	::send(Socket, ch, len, 0);
+}
+
 //设置时钟
 void ControlUI::on_WTimeBtn_clicked()
 {
@@ -106,7 +118,6 @@ void ControlUI::on_DownBtn_clicked()
 void ControlUI::on_INITBtn_clicked()
 {
 	cmmIndex = 2306;
-	//读取ID
 	QString Comm = "INIT\r\n";
 	QByteArray ba = Comm.toLatin1();
 	LPCSTR ch = ba.data();
@@ -117,8 +128,7 @@ void ControlUI::on_INITBtn_clicked()
 //复位
 void ControlUI::on_RESETBtn_clicked()
 {
-	cmmIndex = 201;
-	//读取ID
+	cmmIndex = 2307;
 	QString Comm = "RESET\r\n";
 	QByteArray ba = Comm.toLatin1();
 	LPCSTR ch = ba.data();
@@ -129,7 +139,6 @@ void ControlUI::on_RESETBtn_clicked()
 void ControlUI::on_RPTBtn_clicked()
 {
 	cmmIndex = 2308;
-	//读取ID
 	QString Comm = "PT\r\n";
 	QByteArray ba = Comm.toLatin1();
 	LPCSTR ch = ba.data();
@@ -149,62 +158,33 @@ void ControlUI::on_WPTBtn_clicked()
     ::send(Socket, ch, len, 0);
 }
 
-
-
-//读取时钟
-void ControlUI::on_RTimeBtn_clicked()
-{
-	cmmIndex = 203;
-	//读取时钟
-	QString Comm = "DATETIME\r\n";
-	QByteArray ba = Comm.toLatin1();
-	LPCSTR ch = ba.data();
-	int len = Comm.length();
-	::send(Socket, ch, len, 0);
-}
-
-
 //设备返回值
 void ControlUI::setValue(QStringList list)
 {
 	switch (cmmIndex)
 	{
-	case 101://设备号
+	case 2301://读取ID
 	{
 		if (list.count() < 1)
 			break;
-		//	ui.DevicelineEdit->setText(list.at(0));
+			ui.DevicelineEdit_Port->setText(list.at(0));
 		break;
 	}
-	case 103://设备时间
+	case 2303://设备时间
 	{
 		if (list.count() < 2)
 			break;
 		QString datetime;
-		datetime = list.at(0) + " " + list.at(1);
-		QDateTime time = QDateTime::fromString(datetime, "yyyy-MM-dd hh:mm:ss");
-		//	ui.RdateTimeEdit->setDateTime(time);
+		datetime = list.at(0) + "," + list.at(1);
+		QDateTime time = QDateTime::fromString(datetime, "yyyy-MM-dd,hh:mm:ss");
+		ui.RdateTimeEdit->setDateTime(time);
 		break;
 	}
-	case 105://海拔
+	case 2308://PT
 	{
 		if (list.count() < 1)
 			break;
-		//ui.LineEdit_ALT->setText(list.at(0));
-		break;
-	}
-	case 107://纬度
-	{
-		if (list.count() < 1)
-			break;
-		//ui.LineEdit_LAT->setText(list.at(0));
-		break;
-	}
-	case 109://经度
-	{
-		if (list.count() < 1)
-			break;
-		//	ui.LineEdit_LNG->setText(list.at(0));
+		ui.lineEdit_Addr->setText(list.at(0));
 		break;
 	}
 	default:
