@@ -67,7 +67,7 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 				//
 				QJsonObject SubJson;
 				SubJson.insert("DataType", 1);//数据类型 观测数据
-											   //005协议
+				 //005协议
 				if (strlist.at(0).toInt() != 5 || !(strlist.count() == 32 || strlist.count() == 28))
 				{
 					i++;
@@ -85,22 +85,22 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 					//时间
 					QString time = Convert2Time(strlist.at(2));
 					SubJson.insert("ObserveTime", time);
-					//土壤湿度10CM
-					SubJson.insert("SoilVolume10", strlist.at(3).toFloat());
-					//土壤湿度20CM
-					SubJson.insert("SoilVolume20", strlist.at(4).toFloat());
-					//土壤湿度30CM
-					SubJson.insert("SoilVolume30", strlist.at(5).toFloat());
-					//土壤湿度40CM
-					SubJson.insert("SoilVolume40", strlist.at(6).toFloat());
-					//土壤温度10CM
-					SubJson.insert("ABA1", strlist.at(7).toFloat());
-					//土壤温度20CM
-					SubJson.insert("ABA2", strlist.at(8).toFloat());
-					//土壤温度30CM
-					SubJson.insert("ABA3", strlist.at(9).toFloat());
-					//土壤温度40CM
-					SubJson.insert("ABA4", strlist.at(10).toFloat());
+					////土壤湿度10CM
+					//SubJson.insert("SoilVolume10", strlist.at(3).toFloat());
+					////土壤湿度20CM
+					//SubJson.insert("SoilVolume20", strlist.at(4).toFloat());
+					////土壤湿度30CM
+					//SubJson.insert("SoilVolume30", strlist.at(5).toFloat());
+					////土壤湿度40CM
+					//SubJson.insert("SoilVolume40", strlist.at(6).toFloat());
+					////土壤温度10CM
+					//SubJson.insert("ABA1", strlist.at(7).toFloat());
+					////土壤温度20CM
+					//SubJson.insert("ABA2", strlist.at(8).toFloat());
+					////土壤温度30CM
+					//SubJson.insert("ABA3", strlist.at(9).toFloat());
+					////土壤温度40CM
+					//SubJson.insert("ABA4", strlist.at(10).toFloat());
 					//空气温度
 					SubJson.insert("AAA", strlist.at(11).toFloat());
 					//空气湿度
@@ -136,13 +136,33 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 					//地址信息2
 					//json.insert("", strlist.at(27).toFloat());
 					//土壤湿度5
-					SubJson.insert("SoilVolume50", strlist.at(28).toFloat());
-					//土壤湿度6
-					SubJson.insert("SoilVolume60", strlist.at(29).toFloat());
-					//土壤温度5
-					SubJson.insert("ABA5", strlist.at(30).toFloat());
-					//土壤温度6
-					SubJson.insert("ABA6", strlist.at(31).toFloat());
+					//SubJson.insert("SoilVolume50", strlist.at(28).toFloat());
+					////土壤湿度6
+					//SubJson.insert("SoilVolume60", strlist.at(29).toFloat());
+					//土壤湿度
+					QString SoilVolume;
+					SoilVolume.sprintf("%f,%f,%f,%f,%f,%f",
+						strlist.at(3).toFloat(),
+						strlist.at(4).toFloat(),
+						strlist.at(5).toFloat(),
+						strlist.at(6).toFloat(),
+						strlist.at(28).toFloat(),
+						strlist.at(29).toFloat());
+					SubJson.insert("SoilVolume", SoilVolume);
+					//土壤温度
+					QString Tmp;
+					Tmp.sprintf("%f,%f,%f,%f,%f,%f",
+						strlist.at(7).toFloat(),
+						strlist.at(8).toFloat(),
+						strlist.at(9).toFloat(),
+						strlist.at(10).toFloat(),
+						strlist.at(30).toFloat(),
+						strlist.at(31).toFloat());
+					SubJson.insert("ABA", Tmp);
+					////土壤温度5
+					//SubJson.insert("ABA5", strlist.at(30).toFloat());
+					////土壤温度6
+					//SubJson.insert("ABA6", strlist.at(31).toFloat());
 				}
 				else if (strlist.count()==28)
 				{
@@ -155,22 +175,22 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 					//时间
 					QString time = Convert2Time(strlist.at(2));
 					SubJson.insert("ObserveTime", time);
-					//土壤湿度10CM
-					SubJson.insert("SoilVolume10", strlist.at(3).toFloat());
-					//土壤湿度20CM
-					SubJson.insert("SoilVolume20", strlist.at(4).toFloat());
-					//土壤湿度30CM
-					SubJson.insert("SoilVolume30", strlist.at(5).toFloat());
-					//土壤湿度40CM
-					SubJson.insert("SoilVolume40", strlist.at(6).toFloat());
-					//土壤温度10CM
-					SubJson.insert("ABA1", strlist.at(7).toFloat());
-					//土壤温度20CM
-					SubJson.insert("ABA2", strlist.at(8).toFloat());
-					//土壤温度30CM
-					SubJson.insert("ABA3", strlist.at(9).toFloat());
-					//土壤温度40CM
-					SubJson.insert("ABA4", strlist.at(10).toFloat());
+					////土壤湿度10CM
+					//SubJson.insert("SoilVolume10", strlist.at(3).toFloat());
+					////土壤湿度20CM
+					//SubJson.insert("SoilVolume20", strlist.at(4).toFloat());
+					////土壤湿度30CM
+					//SubJson.insert("SoilVolume30", strlist.at(5).toFloat());
+					////土壤湿度40CM
+					//SubJson.insert("SoilVolume40", strlist.at(6).toFloat());
+					////土壤温度10CM
+					//SubJson.insert("ABA1", strlist.at(7).toFloat());
+					////土壤温度20CM
+					//SubJson.insert("ABA2", strlist.at(8).toFloat());
+					////土壤温度30CM
+					//SubJson.insert("ABA3", strlist.at(9).toFloat());
+					////土壤温度40CM
+					//SubJson.insert("ABA4", strlist.at(10).toFloat());
 					//空气温度
 					SubJson.insert("AAA", strlist.at(11).toFloat());
 					//空气湿度
@@ -205,6 +225,22 @@ LRESULT Char2Json(QString &buff, QJsonObject &json)
 					//json.insert("", strlist.at(26).toFloat());
 					//地址信息2
 					//json.insert("", strlist.at(27).toFloat());
+					//土壤湿度
+					QString SoilVolume;
+					SoilVolume.sprintf("%f,%f,%f,%f",
+						strlist.at(3).toFloat(),
+						strlist.at(4).toFloat(),
+						strlist.at(5).toFloat(),
+						strlist.at(6).toFloat());
+					SubJson.insert("SoilVolume", SoilVolume);
+					//土壤温度
+					QString Tmp;
+					Tmp.sprintf("%f,%f,%f,%f",
+						strlist.at(7).toFloat(),
+						strlist.at(8).toFloat(),
+						strlist.at(9).toFloat(),
+						strlist.at(10).toFloat());
+					SubJson.insert("ABA", Tmp);
 				}
 				json.insert(QString::number(Count), SubJson);
 				//写入备份文件
